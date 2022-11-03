@@ -8,3 +8,6 @@ runserver:
 # git commands
 push:
 	git add . && git commit -m "$(COMMIT_MSG)" && git push origin main
+
+pull:
+	git pull origin main
