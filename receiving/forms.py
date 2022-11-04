@@ -19,3 +19,10 @@ class ProductCreateForm(forms.ModelForm):
     class Meta:
         model = Product
         exclude = ("created_at", "updated_at", "deleted_at", "id")
+
+
+class ProductUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        exclude = ("created_at", "updated_at", "deleted_at", "id")

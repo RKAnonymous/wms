@@ -5,10 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-{% if msg %}
-    <p>{{ msg }}</p>
-{% elif error %}
-    <p>{{ error }}</p>
+{% if error %}
+<p>{{ error }}</p>
 {% endif %}
 
 <table>
@@ -24,7 +22,6 @@
     </tr>
     </thead>
     <tbody>
-    {% for inventory in inventories %}
     <tr>
         <td>{{ inventory.sender }}</td>
         <td>{{ inventory.receiver }}</td>
@@ -33,12 +30,11 @@
         <td>{{ inventory.updated_at }}</td>
         <td>{{ inventory.deleted_at }}</td>
         <td>
-            <p><a href="{% url 'detail-inventory' inventory.id %}">detail</a></p>
-            <p><a href="{% url 'update-inventory' inventory.id %}">update</a></p>
+            <a href="{% url 'detail-inventory' inventory.id %}">detail</a>
+            <a href="{% url 'update-inventory' inventory.id %}">update</a>
             <a href="{% url 'delete-inventory' inventory.id %}">delete</a>
         </td>
     </tr>
-    {% endfor %}
 
     </tbody>
 </table>
