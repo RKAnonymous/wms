@@ -23,12 +23,12 @@ def inventory_detail(request, id):
     inventory = Inventory.objects.get(id=id)
     context = {}
 
-    if inventories:
+    if inventory:
         context["inventory"] = inventory
-    else:
-        context["error"] = "Inventory Not found."
+        return render(request, "detail_inv.html", context)
 
-    return render(request, "inventory.html", context)
+    context["error"] = "Inventory Not found."
+    return render(request, "inventories.html", context)
 
 
 def create_inventory(request):
@@ -80,7 +80,33 @@ def delete_inventory(request, id):
     context = {
         "error": "Object is not found"
     }
-    return render(request, "delete_inv.html", context)
+    # return render(request, "delete_inv.html", context)
+
+
+def products_list(request):
+    products = Product.objects.all().order_by('-created_at')
+    context = {}
+
+    if products:
+        context["products"] = products
+    else:
+        context["error"] = "No products found."
+
+    return render(request, "products.html", context)
+
+
+def product_detail(request, id):
+    product = Product.objects.get(id=id)
+    context = {}
+
+    if product:
+        context["product"] = product
+        return render(request, 'detail_product.html', context)
+
+
+    context["error"] = "Product Not found."
+
+    return render(request, "products.html", context)
 
 
 def create_product(request):
@@ -121,3 +147,16 @@ def update_product(request, id):
     }
 
     return render(request, "update_product.html", context)
+
+
+def delete_product(request, id):
+    obj = Product.objects.get(id=id)
+
+    if obj and request.method == "delete":
+        obj.delete()
+        return render(request, "products.html", {"msg": "Deleted"})
+
+    context = {
+        "error": "Object is not found"
+    }
+    # return render(request, "delete_inv.html", context)

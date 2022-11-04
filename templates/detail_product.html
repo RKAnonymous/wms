@@ -23,7 +23,6 @@
     </tr>
     </thead>
     <tbody>
-    {% for product in products %}
     <tr>
         <td>{{ product.name }}</td>
         <td>{{ product.category }}</td>
@@ -34,23 +33,22 @@
             {% if product.updated_at %}
                 {{ product.updated_at }}
             {% else %}
-                -------
+                ------
             {% endif %}
         </td>
         <td>
             {% if product.deleted_at %}
                 {{ product.deleted_at }}
             {% else %}
-                -------
+                ------
             {% endif %}
         </td>
         <td>
-            <a href="{% url 'detail-product' product.id %}">detail</a>
+{#            <a href="{% url 'detail-product' product.id %}">detail</a>#}
             <a href="{% url 'update-product' product.id %}">update</a>
             <a href="{% url 'delete-product' product.id %}">delete</a>
         </td>
     </tr>
-    {% endfor %}
 
 
     </tbody>

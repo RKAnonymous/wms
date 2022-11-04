@@ -30,7 +30,7 @@
         <td>{{ inventory.updated_at }}</td>
         <td>{{ inventory.deleted_at }}</td>
         <td>
-            <a href="{% url 'detail-inventory' inventory.id %}">detail</a>
+{#            <a href="{% url 'detail-inventory' inventory.id %}">detail</a>#}
             <a href="{% url 'update-inventory' inventory.id %}">update</a>
             <a href="{% url 'delete-inventory' inventory.id %}">delete</a>
         </td>
