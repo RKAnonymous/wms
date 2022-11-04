@@ -1,11 +1,13 @@
 from django.urls import path, include
 from .views import (
+    home,
     products_list, product_detail, create_product, update_product, delete_product,
     inventories_list, inventory_detail, create_inventory, update_inventory, delete_inventory
 )
 
 
 urlpatterns = [
+    path('', home, name="home"),
     path('inventories/', include([
         path('', inventories_list, name="inventories"),
         path('detail/<int:id>/', inventory_detail, name="detail-inventory"),

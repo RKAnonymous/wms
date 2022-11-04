@@ -38,6 +38,58 @@
 
     </tbody>
 </table>
+<br>
+<br>
+<br>
+{% if products %}
+<table>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Category</td>
+        <td>Amount</td>
+        <td>Inventory</td>
+        <td>Created</td>
+        <td>Modified</td>
+        <td>Deleted</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.amount }} {{ product.unit }}</td>
+        <td>{{ product.inventory_id }}</td>
+        <td>{{ product.created_at }}</td>
+        <td>
+            {% if product.updated_at %}
+                {{ product.updated_at }}
+            {% else %}
+                ------
+            {% endif %}
+        </td>
+        <td>
+            {% if product.deleted_at %}
+                {{ product.deleted_at }}
+            {% else %}
+                ------
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'detail-product' product.id %}">detail</a>
+            <a href="{% url 'update-product' product.id %}">update</a>
+            <a href="{% url 'delete-product' product.id %}">delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+{% else %}
+<h5>Inventory is empty!</h5>
+{% endif %}
 
 </body>
 </html>

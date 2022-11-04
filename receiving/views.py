@@ -7,6 +7,17 @@ from .models import Product, Inventory
 NOW = timezone.now()
 
 
+def home(request):
+    recently_added_inventories = Inventory.objects.all().order_by('-created_at')[:3]
+    print(recently_added_inventories)
+    recently_modified_inventories = Inventory.objects.all().order_by('-updated_at')[:3]
+    context = {
+        "recently_added": recently_added_inventories,
+        "recently_modified": recently_modified_inventories
+    }
+    return render(request, "home.html", context)
+
+
 def inventories_list(request):
     inventories = Inventory.objects.all().order_by('-created_at')
     context = {}
@@ -22,9 +33,10 @@ def inventories_list(request):
 def inventory_detail(request, id):
     inventory = Inventory.objects.get(id=id)
     context = {}
-
+    inventory_products = Product.objects.filter(inventory_id=id)
     if inventory:
         context["inventory"] = inventory
+        context["products"] = inventory_products
         return render(request, "detail_inv.html", context)
 
     context["error"] = "Inventory Not found."

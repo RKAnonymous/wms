@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h5>Newest Inventories</h5>
+{% for inventory in recently_added %}
+<p><a href="{% url 'detail-inventory' inventory.id %}">{{ inventory.sender }}</a></p>
+{% endfor %}
+
+<h5>Lastly Modified Inventories</h5>
+{% for inventory in recently_modified %}
+<p><a href="{% url 'detail-inventory' inventory.id %}">{{ inventory.sender }}</a></p>
+{% endfor %}
+<a href="{% url 'inventories' %}">All</a>
+{#<a href="{% url 'products' %}">P</a>#}
+</body>
+</html>
